@@ -1,0 +1,9 @@
+[mysqld]
+# Time to wait before disconnecting
+wait_timeout = 7200
+# innodb_buffer_pool_size is the amount of memory to use to cache tables, indexes and other things.
+innodb_buffer_pool_size = 512
+# avoid SSL Warning during startup
+skip_ssl
+#bind-address is set to 0.0.0.0 so that mysql listens on all network interfaces
+bind-address = 0.0.0.0

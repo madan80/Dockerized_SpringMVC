@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+  springmvc:
+    build: ./springmvc
+    container_name: springmvc
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    networks:
+      - test-network
+  mysql:
+    build: ./mysql 
+    container_name: demo-mysql
+    ports:
+      - 3306:3306
+    environment:
+       MYSQL_DATABASE: dev
+       MYSQL_USER:  root
+       MYSQL_PASSWORD: root
+       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - /data/mysql:/var/lib/mysql
+    command: --init-file /docker-entrypoint-initdb.d/mysql-init.sql
+    restart: always
+    networks:
+       - test-network
+networks:
+  test-network:
+    driver: bridge
